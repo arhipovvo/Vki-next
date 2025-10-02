@@ -3,8 +3,6 @@ import { dehydrate } from '@tanstack/react-query';
 import TanStackQuery from '@/containers/TanStackQuery';
 import queryClient from '@/api/reactQueryClient';
 import { getGroupsApi } from '@/api/groupsApi';
-import { getstudentsDb } from '@/db/studentsDb';
-import { getStudentsApi } from '@/api/studentsApi'
 import type GroupInterface from '@/types/GroupInterface';
 import Header from '@/components/layout/Header/Header';
 import Footer from '@/components/layout/Footer/Footer';
@@ -13,18 +11,19 @@ import Main from '@/components/layout/Main/Main';
 import type { Metadata } from 'next';
 
 import '@/styles/globals.scss';
-import StudentsInterface from '@/types/Studentsinterface';
+import { META_DESCRIPTION, META_TITLE } from '@/constants/meta';
+import type StudentInterface from '@/types/StudentInterface';
+import { getStudentsApi } from '@/api/studentsApi';
 
 export const metadata: Metadata = {
-  title: 'Вэб разработка ВКИ - Next.js шаблон',
-  description: 'Шаблон для веб-разработки с использованием Next.js, React Hook Form, Yup, SCSS, Eslint, TanStack Query (React Query)',
+  title: META_TITLE,
+  description: META_DESCRIPTION,
 };
 
 const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>): Promise<React.ReactElement> => {
-  let groups: GroupInterface[];
-  let students:StudentsInterface[];
 
   // выполняется на сервере - загрузка групп
+  let groups: GroupInterface[];
   await queryClient.prefetchQuery({
     queryKey: ['groups'],
     queryFn: async () => {
@@ -34,12 +33,13 @@ const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>)
     },
   });
 
-   // выполняется на сервере - загрузка групп
+  // выполняется на сервере - загрузка студентов
+  let students: StudentInterface[];
   await queryClient.prefetchQuery({
     queryKey: ['students'],
     queryFn: async () => {
       students = await getStudentsApi();
-      console.log('students', students);
+      console.log('Students', students);
       return students;
     },
   });
