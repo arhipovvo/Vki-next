@@ -6,17 +6,22 @@ import useStudents from '@/hooks/useStudents';
 import Student from './Student/Student';
 
 const Students = (): React.ReactElement => {
-  const { students } = useStudents();
+  const { students, deleteStudentMutate } = useStudents();
 
-  const onDeleteHandler = (id: number) =>  {
-   console.log(id);
-  }
+  const onDeleteHandler = (studentId: number): void => {
+    if (confirm('Удалить студента?')) {
+      deleteStudentMutate(studentId);
+    }
+  };
 
   return (
     <div className={styles.Students}>
-     
       {students.map((student: StudentInterface) => (
-       <Student student={student} onDelete={onDeleteHandler} />
+        <Student
+          key={student.id}
+          student={student}
+          onDelete={onDeleteHandler}
+        />
       ))}
     </div>
   );
