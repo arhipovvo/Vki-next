@@ -1,18 +1,18 @@
-import Students from '@/components/Students/Students';
+import Groups from '@/components/Groups/Groups';
 import Page from '@/components/layout/Page/Page';
 import { META_DESCRIPTION, META_TITLE } from '@/constants/meta';
 import { type Metadata } from 'next/types';
 
 export const metadata: Metadata = {
-  title: `Студенты - ${META_TITLE}`,
+  title: `Вход - ${META_TITLE}`,
   description: META_DESCRIPTION,
 };
 
-const StudentsPage = (): React.ReactNode => (
+const GroupsPage = (): React.ReactNode => (
   <Page>
-    <h1>Студенты</h1>
-    <Students />
+    <h1>Группы</h1>
+    <Groups />
   </Page>
 );
 
-export default StudentsPage;
+export default GroupsPage;
