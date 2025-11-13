@@ -122,8 +122,10 @@ const useStudents = (): StudentsHookInterface => {
       //   return;
       // }
 
-      // const updatedStudents = [...previousStudents.filter(s => s.id !== -1), newStudent];
-      // queryClient.setQueryData<StudentInterface[]>(['students'], updatedStudents);
+     // const updatedStudentsNew = updatedStudents.map((student: StudentInterface) => ({
+      //   ...(student.uuid === newStudent.uuid ? newStudent : student),
+      // }));
+      // queryClient.setQueryData<StudentInterface[]>(['students'], updatedStudentsNew);
     },
   });
 
