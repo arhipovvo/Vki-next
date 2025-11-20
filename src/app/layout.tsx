@@ -19,11 +19,6 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>): Promise<React.ReactElement> => {
-  // выполняется на сервере - загрузка групп
-  await queryClient.prefetchQuery({
-    queryKey: ['groups'],
-    queryFn: getGroupsApi,
-  });
 
   // выполняется на сервере - загрузка студентов
   await queryClient.prefetchQuery({
@@ -31,6 +26,12 @@ const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>)
     queryFn: getStudentsApi,
   });
 
+  // выполняется на сервере - загрузка групп
+  await queryClient.prefetchQuery({
+    queryKey: ['groups'],
+    queryFn: getGroupsApi,
+  });
+  
   // дегидрация состояния
   const state = dehydrate(queryClient, { shouldDehydrateQuery: () => true });
 
