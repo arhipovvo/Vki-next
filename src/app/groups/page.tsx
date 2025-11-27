@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const GroupsPage = (): React.ReactNode => (
   <Page>
-    <h1>Группы</h1>
+    <h1>Группы безумных студентов</h1>
     <Groups />
   </Page>
 );
